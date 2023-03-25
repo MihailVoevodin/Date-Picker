@@ -3,3 +3,23 @@
   margin-top: 200px;
   color: black;
 }
+
+.nowDateContainer {
+  margin-top: 10px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  border: 1px solid lightgrey;
+}
+
+.nowDateText {
+  padding: 10px;
+  font-weight: 700;
+  background-color: lightgrey;
+}
+
+.nowDate {
+  font-size: 12px;
+  line-height: 1;
+  padding: 10px;
+}

@@ -1,15 +1,24 @@
 import classNames from 'classnames';
+import {Relative} from 'components/Relative/Relative';
 import React, {Dispatch, SetStateAction, useState} from 'react';
 import {Now} from 'components/Now/Now';
 import {ITab} from 'common/Models';
 import styles from 'components/Popup/Popup.module.scss';
 
+/**
+ * @param date Дата.
+ * @param text Текст начало или конец выбранного отрезка.
+ * @param setDate Проп установки новой даты в состояние компонента.
+ */
 interface IProps {
-    date: string,
+    date: Date,
     text: string,
-    setDate: Dispatch<SetStateAction<string>>,
+    setDate: Dispatch<SetStateAction<Date>>,
 }
 
+/**
+ * Компонент выпадающего окна с табами видов установки даты.
+ */
 export const Popup: React.FC<IProps> = ({date, text, setDate}) => {
     const [selectedTab, setSelectedTab] = useState<number>(1)
 
@@ -26,7 +35,7 @@ export const Popup: React.FC<IProps> = ({date, text, setDate}) => {
         {
             id: 2,
             label: 'Relative',
-            children: <div>relative</div>
+            children: <Relative date={date} text={text} setDate={setDate} />
         },
         {
             id: 3,
@@ -57,4 +66,3 @@ export const Popup: React.FC<IProps> = ({date, text, setDate}) => {
         </div>
     )
 }
-
