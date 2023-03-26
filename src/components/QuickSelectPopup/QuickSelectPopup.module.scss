@@ -1,0 +1,86 @@
+.popup {
+  min-width: 200px;
+  position: absolute;
+  background-color: #fff;
+  left: 0;
+  top: 53px;
+  border: 1px solid darkgray;
+  text-align: left;
+  padding: 10px;
+  span {
+    font-size: 12px;
+    font-weight: 700;
+  }
+}
+
+.popup::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  width: 14px;
+  height: 14px;
+  transform: rotate(45deg) translateX(-50%);
+  background-color: #fff;
+  left: 24px;
+  border-left: 1px solid darkgray;
+  border-top: 1px solid darkgray;
+}
+
+.inputsContainer {
+  display: flex;
+  margin: 10px 0;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #dddddd;
+  &:not(:last-child) {
+    padding-right: 10px;
+  }
+}
+
+.selectFrom,
+.input,
+.selectRange {
+  display: block;
+  width: 90px;
+  height: 30px;
+  outline: none;
+  padding: 0;
+  margin-right: 10px;
+  border-color: #dddddd;
+  &:focus {
+    border-bottom: 1px solid #006BB4;
+  }
+}
+
+.input {
+  height: 28.19px;
+  line-height: 1;
+  border: 1px solid #dddddd;
+}
+
+.btn {
+  cursor: pointer;
+  height: 30px;
+  border: 1px solid #006BB4;
+  border-radius: 10px;
+  background-color: transparent;
+  transition: all .5s;
+  &:hover {
+    text-decoration: underline;
+    background-color: lightskyblue;
+  }
+}
+
+.commonly {
+  font-size: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.commonlyItem {
+  color: #006BB4;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}

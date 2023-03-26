@@ -1,6 +1,6 @@
 import {T} from 'common/Text';
 import {calculateSelectOptionDate, dateInFormat} from 'common/Utils';
-import React, {ChangeEvent, Dispatch, SetStateAction, useEffect, useState} from 'react';
+import React, {ChangeEvent, Dispatch, SetStateAction, useState} from 'react';
 import styles from 'components/Relative/Relative.module.scss';
 
 /**
@@ -15,22 +15,19 @@ interface IProps {
 }
 
 /**
- * Компонент установки относительной даты.
+ * Компонент относительного выбора даты.
  */
 export const Relative: React.FC<IProps> = ({date, text, setDate}) => {
     const [inputValue, setInputValue] = useState<number>(15)
     const [selectedRange, setSelectedRange] = useState<string>('Seconds ago')
 
     const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value
-        setInputValue(Number(value))
+        setInputValue(Number(e.target.value))
+        calculateSelectOptionDate(selectedRange, setDate, inputValue)
     }
 
-    useEffect(() => {
-        calculateSelectOptionDate(selectedRange, setDate, inputValue)
-    }, [inputValue, selectedRange])
-
     const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+        calculateSelectOptionDate(e.target.value, setDate, inputValue)
         setSelectedRange(e.target.value)
     }
 
@@ -39,7 +36,7 @@ export const Relative: React.FC<IProps> = ({date, text, setDate}) => {
             <div className={styles.inputsContainer}>
                 <input className={styles.input} type='number' value={inputValue} onChange={handleChangeInput} />
                 <select className={styles.select} onChange={handleChangeSelect}>
-                    {T.selectItems.map((item: string, id: number) => <option key={id} value={item}>{item}</option>)}
+                    {T.selectRangeItems.map((item: string, id: number) => <option key={id} value={item}>{item}</option>)}
                 </select>
             </div>
             <div className={'nowDateContainer'}>

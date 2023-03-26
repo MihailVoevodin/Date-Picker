@@ -1,15 +1,38 @@
 .rangeContainer {
   margin: 0 auto;
   height: 40px;
-  width: 450px;
+  width: 500px;
   border: 1px solid #ddd;
   display: grid;
-  grid-template-columns: 45% 10% 45%;
+  grid-template-columns: 10% 40% 10% 40%;
   align-items: center;
+}
+
+.quickSelectContainer {
+  display: flex;
+  align-items: center;
+  border-right: 1px solid lightgrey;
+  justify-content: center;
+  position: relative;
+}
+
+.quickBtn {
+  height: 40px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .dateContainer {
   position: relative;
+}
+
+.dateContainer,
+.quickSelectContainer {
+  transition: all .5s;
+  &:hover {
+    background-color: lightskyblue;
+  }
 }
 
 .dateBtn {

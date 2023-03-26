@@ -14,7 +14,7 @@ interface IProps {
 }
 
 /**
- * Компонент установки даты на настоящий момент.
+ * Компонент выбора даты на настоящий момент.
  */
 export const Now: React.FC<IProps> = ({date, text, setDate}) => {
 

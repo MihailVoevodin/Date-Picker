@@ -1,7 +1,8 @@
+import React, {Dispatch, SetStateAction, useState} from 'react';
 import classNames from 'classnames';
 import {Relative} from 'components/Relative/Relative';
-import React, {Dispatch, SetStateAction, useState} from 'react';
 import {Now} from 'components/Now/Now';
+import {Absolute} from 'components/Absolute/Absolute';
 import {ITab} from 'common/Models';
 import styles from 'components/Popup/Popup.module.scss';
 
@@ -30,7 +31,7 @@ export const Popup: React.FC<IProps> = ({date, text, setDate}) => {
         {
             id: 1,
             label: 'Absolute',
-            children: <div>calendar</div>
+            children: <Absolute date={date} text={text} setDate={setDate} />
         },
         {
             id: 2,

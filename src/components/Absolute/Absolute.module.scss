@@ -1,0 +1,35 @@
+.absoluteContainer {
+  display: flex;
+}
+
+.timeContainer {
+  position: relative;
+}
+
+.timeList {
+  font-size: 12px;
+  margin: 0;
+  height: 200px;
+  padding: 0 5px 0 10px;
+  overflow-y: auto;
+  list-style: none;
+  &::-webkit-scrollbar {
+    width: 3px;
+    margin-left: 3px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    border: 3px solid #006BB4;
+  }
+}
+
+.timeItem {
+  cursor: pointer;
+  margin: 2px;
+  padding: 3px;
+}
+
+.timeActive {
+  background-color: #006BB4;
+  color: white;
+}
