@@ -47,13 +47,6 @@ export const uniteDate = (date: Date, time: string) => {
     return new Date(date.getFullYear(), date.getMonth(), date.getDate(), pickedHours, pickedMinutes, 0, 0)
 }
 
-export const setDateWithPickedTime = (setDate: Dispatch<SetStateAction<Date>>, date: Date, time: string) => {
-    const timeHours = Number(time.split(':')[0])
-    const timeMinutes = Number(time.split(':')[1])
-
-    setDate(new Date(date.getFullYear(), date.getMonth(), date.getDate(), timeHours, timeMinutes, 0, 0))
-}
-
 /**
  * Вычисление даты(месяцев назад).
  * @param inputValue Дата для форматирования.

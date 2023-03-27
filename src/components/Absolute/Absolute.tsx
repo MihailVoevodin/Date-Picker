@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import {T} from 'common/Text';
-import {dateInFormat, formatTime, setDateWithPickedTime, uniteDate} from 'common/Utils';
+import {dateInFormat, formatTime, uniteDate} from 'common/Utils';
 import React, {Dispatch, SetStateAction, useState} from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -25,7 +25,7 @@ export const Absolute:React.FC<IProps> = ({date, text, setDate}) => {
 
     const onDateChange = (value) => {
         setLocalDate(value)
-        setDateWithPickedTime(setDate, value, time)
+        setDate(uniteDate(value, time))
     }
 
     const handleChangeTime = (time) => {
