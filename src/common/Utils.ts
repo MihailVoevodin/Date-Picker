@@ -192,3 +192,45 @@ export const calculateQuickSelectOptionDate = (fromValue: string, range: string,
         }
     }
 }
+
+export const calculateCommonRangesDates = (value: string, setStart: Dispatch<SetStateAction<Date>>, setEnd: Dispatch<SetStateAction<Date>>) => {
+    const date = new Date()
+    const currentWeekDay = date.getDay();
+    const startWeekDate = Number(date.getDate() - currentWeekDay)
+    const endWeekDate = Number(date.getDate() - currentWeekDay + 6)
+    switch (value) {
+        case 'Today':
+            setStart(new Date(date.setHours(0,0,0,0)))
+            setEnd(new Date(date.setHours(23,59,59,999)))
+            break
+        case 'This week':
+            setStart(new Date(date.getFullYear(), date.getMonth(), startWeekDate, 0, 0, 0, 0))
+            setEnd(new Date(date.getFullYear(), date.getMonth(), endWeekDate,23,59,59,999))
+            break
+        case 'This month':
+            setStart(new Date(date.getFullYear(), date.getMonth(), 1, 0, 0, 0, 0))
+            setEnd(new Date(date.getFullYear(), date.getMonth() + 1, 0,23,59,59,999))
+            break
+        case 'This year':
+            setStart(new Date(date.getFullYear(), 0, 1, 0, 0, 0, 0))
+            setEnd(new Date(date.getFullYear(), 12, 0,23,59,59,999))
+            break
+        case 'Yesterday':
+            setStart(new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1, 0, 0, 0, 0))
+            setEnd(new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1,23,59,59,999))
+            break
+        case 'Week to date':
+            setStart(new Date(date.getFullYear(), date.getMonth(), startWeekDate, 0, 0, 0, 0))
+            setEnd(date)
+            break
+        case 'Month to date':
+            setStart(new Date(date.getFullYear(), date.getMonth(), 1, 0, 0, 0, 0))
+            setEnd(date)
+            break
+        case 'Year to date':
+            setStart(new Date(date.getFullYear(), 0, 1, 0, 0, 0, 0))
+            setEnd(date)
+            break
+    }
+
+}

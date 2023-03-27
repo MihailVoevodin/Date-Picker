@@ -75,12 +75,21 @@
   font-size: 14px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  padding-bottom: 15px;
+  border-bottom: 1px solid #dddddd;
 }
 
-.commonlyItem {
+.commonlyItem,
+.recentlyItem {
   color: #006BB4;
   cursor: pointer;
   &:hover {
     text-decoration: underline;
   }
+}
+
+.recently {
+  font-size: 14px;
+  max-height: 100px;
+  overflow-y: auto;
 }

@@ -90,12 +90,12 @@ export const T = {
     ],
     commonlyUsedItems: [
         'Today',
-        'This week',
-        'This month',
-        'This year',
         'Yesterday',
+        'This week',
         'Week to date',
+        'This month',
         'Month to date',
+        'This year',
         'Year to date',
     ],
 }
