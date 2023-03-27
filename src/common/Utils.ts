@@ -35,10 +35,23 @@ export const formatTime = (time: Date) => {
     }
 }
 
+/**
+ * Объединение даты и выбранного времени.
+ * @param date Выбранная дата.
+ * @param time Время для округления.
+ */
 export const uniteDate = (date: Date, time: string) => {
-    const pickedTime = (Number(time.split(':')[0]) * 1000 * 60 * 60) + (Number(time.split(':')[1]) * 1000 * 60)
+    const pickedHours = Number(time.split(':')[0])
+    const pickedMinutes = Number(time.split(':')[1])
 
-    return new Date(date.getTime() + pickedTime)
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate(), pickedHours, pickedMinutes, 0, 0)
+}
+
+export const setDateWithPickedTime = (setDate: Dispatch<SetStateAction<Date>>, date: Date, time: string) => {
+    const timeHours = Number(time.split(':')[0])
+    const timeMinutes = Number(time.split(':')[1])
+
+    setDate(new Date(date.getFullYear(), date.getMonth(), date.getDate(), timeHours, timeMinutes, 0, 0))
 }
 
 /**
