@@ -36,9 +36,9 @@ export const formatTime = (time: Date) => {
 }
 
 /**
- * Объединение даты и выбранного времени.
+ * Объединение выбранных даты и времени.
  * @param date Выбранная дата.
- * @param time Время для округления.
+ * @param time Выбранное время.
  */
 export const uniteDate = (date: Date, time: string) => {
     const pickedHours = Number(time.split(':')[0])
@@ -199,6 +199,12 @@ export const calculateQuickSelectOptionDate = (fromValue: string, range: string,
     }
 }
 
+/**
+ * Вычисление и установка диапазона часто используемых промежутков.
+ * @param value Значение промежутка.
+ * @param setStart Аргумент установки новой даты в состояние компонента.
+ * @param setEnd Аргумент установки новой даты в состояние компонента.
+ */
 export const calculateCommonRangesDates = (value: string, setStart: Dispatch<SetStateAction<Date>>, setEnd: Dispatch<SetStateAction<Date>>) => {
     const date = new Date()
     const currentWeekDay = date.getDay();
