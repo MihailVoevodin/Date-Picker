@@ -144,7 +144,7 @@ export const calculateSelectOptionDate = (range: string, setter: Dispatch<SetSta
  * @param setEnd Аргумент установки новой даты в состояние компонента.
  * @param inputValue Дата для форматирования.
  */
-export const calculateQuickSelectOptionDate = (fromValue: string, range: string, setStart: Dispatch<SetStateAction<Date>>, setEnd: Dispatch<SetStateAction<Date>>, inputValue: number) => {
+export const calculateQuickSelectOptionsDate = (fromValue: string, range: string, setStart: Dispatch<SetStateAction<Date>>, setEnd: Dispatch<SetStateAction<Date>>, inputValue: number) => {
     if (fromValue === 'Last') {
         setEnd(new Date())
         switch (range) {

@@ -1,5 +1,5 @@
 import {T} from 'common/Text';
-import {calculateCommonRangesDates, calculateQuickSelectOptionDate} from 'common/Utils';
+import {calculateCommonRangesDates, calculateQuickSelectOptionsDate} from 'common/Utils';
 import React, {ChangeEvent, Dispatch, SetStateAction, useState} from 'react';
 import styles from 'components/QuickSelectPopup/QuickSelectPopup.module.scss';
 
@@ -34,7 +34,7 @@ export const QuickSelectPopup: React.FC<IProps> = ({setStart, setEnd}) => {
     }
 
     const onApplyDate = () => {
-        calculateQuickSelectOptionDate(fromValue, selectedRange, setStart, setEnd, inputValue)
+        calculateQuickSelectOptionsDate(fromValue, selectedRange, setStart, setEnd, inputValue)
         setRecentlyRanges([`${fromValue} ${inputValue} ${selectedRange}`, ...recentlyRanges])
     }
 
@@ -46,7 +46,7 @@ export const QuickSelectPopup: React.FC<IProps> = ({setStart, setEnd}) => {
     const onSetRecentlyRanges = (range: string) => {
         const ranges = range.split(' ')
         if (Number(range.split(' ')[1])) {
-            calculateQuickSelectOptionDate(ranges[0], ranges[2], setStart, setEnd, Number(ranges[1]))
+            calculateQuickSelectOptionsDate(ranges[0], ranges[2], setStart, setEnd, Number(ranges[1]))
         } else {
             calculateCommonRangesDates(range, setStart, setEnd)
         }
