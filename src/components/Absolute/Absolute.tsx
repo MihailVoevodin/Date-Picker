@@ -25,7 +25,7 @@ export const Absolute:React.FC<IProps> = ({date, text, setDate}) => {
 
     const onDateChange = (value) => {
         setLocalDate(value)
-        setDate(value)
+        setDate(uniteDate(value, time))
     }
 
     const handleChangeTime = (time) => {

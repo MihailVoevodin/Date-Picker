@@ -15,7 +15,7 @@ export const DatePicker: React.FC = () => {
     const [startPopupShow, setStartPopupShow] = useState<boolean>(() => false);
     const [endPopupShow, setEndPopupShow] = useState<boolean>(() => false);
     const [quickSelectPopupShow, setQuickSelectPopupShow] = useState<boolean>(false)
-    const [isValid, setIsValid] = useState<boolean>(false);
+    const [notValid, setNotValid] = useState<boolean>(false);
     const datePicker = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
@@ -44,20 +44,20 @@ export const DatePicker: React.FC = () => {
 
     useEffect(() => {
         if (endDate.getTime() < startDate.getTime()) {
-            setIsValid(true)
+            setNotValid(true)
         } else {
-            setIsValid(false)
+            setNotValid(false)
         }
     }, [startDate, endDate])
 
     const toggleStartPopup = () => {
-        setStartPopupShow(true)
+        setStartPopupShow(!startPopupShow)
         setEndPopupShow(false)
         setQuickSelectPopupShow(false)
     }
 
     const toggleEndPopup = () => {
-        setEndPopupShow(true)
+        setEndPopupShow(!endPopupShow)
         setStartPopupShow(false)
         setQuickSelectPopupShow(false)
     }
@@ -80,7 +80,7 @@ export const DatePicker: React.FC = () => {
             <div className={styles.dateContainer}>
                 <button
                     onClick={toggleStartPopup}
-                    className={isValid ? classNames(styles.dateBtn, styles.notValid) : styles.dateBtn}
+                    className={notValid ? classNames(styles.dateBtn, styles.notValid) : styles.dateBtn}
                 >
                     {dateInFormat(startDate)}
                 </button>
@@ -90,7 +90,7 @@ export const DatePicker: React.FC = () => {
             <div className={styles.dateContainer}>
                 <button
                     onClick={toggleEndPopup}
-                    className={isValid ? classNames(styles.dateBtn, styles.notValid) : styles.dateBtn}
+                    className={notValid ? classNames(styles.dateBtn, styles.notValid) : styles.dateBtn}
                 >
                     {dateInFormat(endDate)}
                 </button>

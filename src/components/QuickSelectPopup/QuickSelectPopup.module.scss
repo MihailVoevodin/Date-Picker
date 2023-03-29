@@ -44,9 +44,10 @@
   width: 90px;
   height: 30px;
   outline: none;
-  padding: 0;
+  padding: 0 5px;
   margin-right: 10px;
-  border-color: #dddddd;
+  border: 1px solid #dddddd;
+  background-color: #fff;
   &:focus {
     border-bottom: 1px solid #006BB4;
   }
@@ -75,12 +76,21 @@
   font-size: 14px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  padding-bottom: 15px;
+  border-bottom: 1px solid #dddddd;
 }
 
-.commonlyItem {
+.commonlyItem,
+.recentlyItem {
   color: #006BB4;
   cursor: pointer;
   &:hover {
     text-decoration: underline;
   }
+}
+
+.recently {
+  font-size: 14px;
+  max-height: 100px;
+  overflow-y: auto;
 }
