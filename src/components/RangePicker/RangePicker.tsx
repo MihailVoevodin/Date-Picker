@@ -1,46 +1,36 @@
 import {ArrowRightOutlined, ClockCircleTwoTone, DownOutlined} from '@ant-design/icons';
 import classNames from 'classnames';
+import {useOnDocumentClick} from 'common/Hooks';
 import {QuickSelectPopup} from 'components/QuickSelectPopup/QuickSelectPopup';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {Dispatch, SetStateAction, useEffect, useRef, useState} from 'react';
 import {dateInFormat} from 'common/Utils';
 import {Popup} from 'components/Popup/Popup';
-import styles from 'components/DatePicker/DatePicker.module.scss';
+import styles from 'components/RangePicker/RangePicker.module.scss';
+
+interface IProps {
+    startDate: Date;
+    endDate: Date;
+    onStartDateChange: Dispatch<SetStateAction<Date>>;
+    onEndDateChange: Dispatch<SetStateAction<Date>>;
+}
 
 /**
  * Общий компонент пикера.
  */
-export const DatePicker: React.FC = () => {
-    const [startDate, setStartDate] = useState<Date>(() => new Date())
-    const [endDate, setEndDate] = useState<Date>(() => new Date(new Date().setMinutes(new Date().getMinutes() + 15)))
+export const RangePicker: React.FC<IProps> = ({startDate, endDate, onStartDateChange, onEndDateChange}) => {
     const [startPopupShow, setStartPopupShow] = useState<boolean>(() => false);
     const [endPopupShow, setEndPopupShow] = useState<boolean>(() => false);
     const [quickSelectPopupShow, setQuickSelectPopupShow] = useState<boolean>(false)
     const [notValid, setNotValid] = useState<boolean>(false);
     const datePicker = useRef<HTMLDivElement>(null)
 
-    useEffect(() => {
-        const element = datePicker.current
+    const handleClickOutside = () => {
+        setStartPopupShow(false)
+        setEndPopupShow(false)
+        setQuickSelectPopupShow(false)
+    }
 
-        if (!element) return;
-
-        const onDocumentClick = (e: MouseEvent) => {
-            if (!(e.target instanceof Node)) return;
-
-            if (element.contains(e.target)) {
-                return;
-            }
-
-            setEndPopupShow(false)
-            setStartPopupShow(false)
-            setQuickSelectPopupShow(false)
-        }
-
-        document.addEventListener('click', onDocumentClick)
-
-        return () => {
-            document.removeEventListener('click', onDocumentClick)
-        }
-    }, [])
+    useOnDocumentClick(datePicker.current, handleClickOutside)
 
     useEffect(() => {
         if (endDate.getTime() < startDate.getTime()) {
@@ -75,7 +65,7 @@ export const DatePicker: React.FC = () => {
                     <ClockCircleTwoTone style={{paddingRight: 5}} />
                     <DownOutlined />
                 </button>
-                {quickSelectPopupShow && <QuickSelectPopup setStart={setStartDate} setEnd={setEndDate} />}
+                {quickSelectPopupShow && <QuickSelectPopup onStartDateChange={onStartDateChange} onEndDateChange={onEndDateChange} />}
             </div>
             <div className={styles.dateContainer}>
                 <button
@@ -84,7 +74,7 @@ export const DatePicker: React.FC = () => {
                 >
                     {dateInFormat(startDate)}
                 </button>
-                {startPopupShow && <Popup date={startDate} text={'Start'} setDate={setStartDate} />}
+                {startPopupShow && <Popup date={startDate} text={'Start'} onDateChange={onStartDateChange} />}
             </div>
             <ArrowRightOutlined />
             <div className={styles.dateContainer}>
@@ -94,7 +84,7 @@ export const DatePicker: React.FC = () => {
                 >
                     {dateInFormat(endDate)}
                 </button>
-                {endPopupShow && <Popup date={endDate} text={'End'} setDate={setEndDate} />}
+                {endPopupShow && <Popup date={endDate} text={'End'} onDateChange={onEndDateChange} />}
             </div>
         </div>
     )

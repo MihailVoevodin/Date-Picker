@@ -1,4 +1,15 @@
+import {ETimeRangeUnit} from "common/Models";
+
 export const T = {
+    UnitDictionary: {
+        [ETimeRangeUnit.SECOND]: 'seconds',
+        [ETimeRangeUnit.MINUTE]: 'minutes',
+        [ETimeRangeUnit.HOUR]: 'hours',
+        [ETimeRangeUnit.DAY]: 'days',
+        [ETimeRangeUnit.WEEK]: 'weeks',
+        [ETimeRangeUnit.MONTH]: 'months',
+        [ETimeRangeUnit.YEAR]: 'years',
+    },
     months: [
         'Jan',
         'Feb',
@@ -12,22 +23,6 @@ export const T = {
         'Oct',
         'Nov',
         'Dec',
-    ],
-    selectRangeItems: [
-        'Seconds ago',
-        'Minutes ago',
-        'Hours ago',
-        'Days ago',
-        'Weeks ago',
-        'Months ago',
-        'Years ago',
-        'Seconds from now',
-        'Minutes from now',
-        'Hours from now',
-        'Days from now',
-        'Weeks from now',
-        'Months from now',
-        'Years from now',
     ],
     time: [
         '00:00',
@@ -78,15 +73,6 @@ export const T = {
         '22:30',
         '23:00',
         '23:30',
-    ],
-    selectRangeQuickItems: [
-        'seconds',
-        'minutes',
-        'hours',
-        'days',
-        'weeks',
-        'months',
-        'years',
     ],
     commonlyUsedItems: [
         'Today',

@@ -1,5 +1,6 @@
+import {UNIT_DICTIONARY} from 'common/Const';
 import {T} from 'common/Text';
-import {calculateCommonRangesDates, calculateQuickSelectOptionsDate} from 'common/Utils';
+import {calculateCommonRangesDates, calculateQuickSelectRanges} from 'common/Utils';
 import React, {ChangeEvent, Dispatch, SetStateAction, useState} from 'react';
 import styles from 'components/QuickSelectPopup/QuickSelectPopup.module.scss';
 
@@ -8,14 +9,14 @@ import styles from 'components/QuickSelectPopup/QuickSelectPopup.module.scss';
  * @param setEnd Проп установки конца диапазона.
  */
 interface IProps {
-    setStart: Dispatch<SetStateAction<Date>>;
-    setEnd: Dispatch<SetStateAction<Date>>;
+    onStartDateChange: Dispatch<SetStateAction<Date>>;
+    onEndDateChange: Dispatch<SetStateAction<Date>>;
 }
 
 /**
  * Компонент быстрого выбора относительных промежутков.
  */
-export const QuickSelectPopup: React.FC<IProps> = ({setStart, setEnd}) => {
+export const QuickSelectPopup: React.FC<IProps> = ({onStartDateChange, onEndDateChange}) => {
     const [inputValue, setInputValue] = useState<number>(15)
     const [fromValue, setFromValue] = useState<string>('Last')
     const [selectedRange, setSelectedRange] = useState<string>('seconds')
@@ -34,7 +35,11 @@ export const QuickSelectPopup: React.FC<IProps> = ({setStart, setEnd}) => {
     }
 
     const onApplyDate = () => {
-        calculateQuickSelectOptionsDate(fromValue, selectedRange, setStart, setEnd, inputValue)
+        const dictItem = UNIT_DICTIONARY.find(item => item.label === selectedRange);
+
+        if (dictItem) {
+            calculateQuickSelectRanges(fromValue, inputValue, dictItem.value, onStartDateChange, onEndDateChange)
+        }
         setRecentlyRanges([`${fromValue} ${inputValue} ${selectedRange}`, ...recentlyRanges])
     }
 
@@ -45,10 +50,14 @@ export const QuickSelectPopup: React.FC<IProps> = ({setStart, setEnd}) => {
 
     const onSetRecentlyRanges = (range: string) => {
         const ranges = range.split(' ')
-        if (Number(range.split(' ')[1])) {
-            calculateQuickSelectOptionsDate(ranges[0], ranges[2], setStart, setEnd, Number(ranges[1]))
+        const dictItem = UNIT_DICTIONARY.find(item => item.label === ranges[2]);
+
+        if (+ranges[1]) {
+            if (dictItem) {
+                calculateQuickSelectRanges(ranges[0], +ranges[1], dictItem.value, onStartDateChange, onEndDateChange)
+            }
         } else {
-            calculateCommonRangesDates(range, setStart, setEnd)
+            calculateCommonRangesDates(range, onStartDateChange, onEndDateChange)
         }
     }
 
@@ -62,7 +71,7 @@ export const QuickSelectPopup: React.FC<IProps> = ({setStart, setEnd}) => {
                 </select>
                 <input className={styles.input} type='number' value={inputValue} onChange={handleChangeInput} />
                 <select className={styles.selectRange} onChange={handleChangeRangeSelect}>
-                    {T.selectRangeQuickItems.map((item: string, id: number) => <option key={id} value={item}>{item}</option>)}
+                    {UNIT_DICTIONARY.map(({id, label}) => <option key={id} value={label}>{label}</option>)}
                 </select>
                 <button
                     className={styles.btn}
@@ -76,7 +85,7 @@ export const QuickSelectPopup: React.FC<IProps> = ({setStart, setEnd}) => {
                 {T.commonlyUsedItems.map((item: string) =>
                     <div
                         key={item}
-                        onClick={() => onSetCommonRanges(item, setStart, setEnd)}
+                        onClick={() => onSetCommonRanges(item, onStartDateChange, onEndDateChange)}
                         className={styles.commonlyItem}
                     >
                         {item}
