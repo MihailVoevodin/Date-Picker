@@ -1,4 +1,4 @@
-import {T} from 'common/Text';
+import {MONTHS_DICTIONARY} from 'common/Const';
 import {Dispatch, SetStateAction} from 'react';
 
 
@@ -12,18 +12,33 @@ export const toCamelCase = (str: string) => {
  */
 const addZero = (num: number) => {
     if (num < 10 && num >= 0) {
-        return `0${num}`;
+        return `0${num}`
     } else {
-        return num;
+        return num
     }
 }
+
+export const getTimeList = () => {
+    const result: string[] = []
+    const endTime = 23 * 3600000 + 30 * 60000
+    const step = 30 * 60000
+    for (let i = 0; i <= endTime; i += step) {
+        const hours = Math.floor((i / (1000 * 60 * 60)) % 24)
+        const minutes = Math.floor((i / (1000 * 60)) % 60)
+
+        result.push(`${addZero(hours)}:${addZero(minutes)}`)
+    }
+    return result
+}
+
+
 
 /**
  * Форматирование даты в нужный формат.
  * @param date Дата для форматирования.
  */
 export const dateInFormat = (date: Date) => {
-    return `${T.months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()} @ ${addZero(date.getHours())}:${addZero(date.getMinutes())}:${addZero(date.getSeconds())}:${addZero(date.getMilliseconds())}`
+    return `${MONTHS_DICTIONARY[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()} @ ${addZero(date.getHours())}:${addZero(date.getMinutes())}:${addZero(date.getSeconds())}:${addZero(date.getMilliseconds())}`
 }
 
 /**

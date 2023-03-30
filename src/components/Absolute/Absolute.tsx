@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import {T} from 'common/Text';
+import {TIME_DICTIONARY} from 'common/Const';
 import {dateInFormat, formatTime, uniteDate} from 'common/Utils';
 import React, {Dispatch, SetStateAction, useState} from 'react';
 import Calendar from 'react-calendar';
@@ -45,7 +45,7 @@ export const Absolute:React.FC<IProps> = ({date, text, onDateChange}) => {
             </div>
             <div className={styles.timeContainer}>
                 <ul className={styles.timeList}>
-                    {T.time.map((timeItem) =>
+                    {TIME_DICTIONARY.map((timeItem) =>
                         <li
                             key={timeItem}
                             className={timeItem === time ? classNames(styles.timeItem, styles.timeActive) : styles.timeItem}

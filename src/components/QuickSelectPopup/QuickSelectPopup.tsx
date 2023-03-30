@@ -1,5 +1,4 @@
-import {UNIT_DICTIONARY} from 'common/Const';
-import {T} from 'common/Text';
+import {COMMONLY_USED_RANGES_DICTIONARY, UNIT_DICTIONARY} from 'common/Const';
 import {calculateCommonRangesDates, calculateQuickSelectRanges} from 'common/Utils';
 import React, {ChangeEvent, Dispatch, SetStateAction, useState} from 'react';
 import styles from 'components/QuickSelectPopup/QuickSelectPopup.module.scss';
@@ -82,13 +81,13 @@ export const QuickSelectPopup: React.FC<IProps> = ({onStartDateChange, onEndDate
             </div>
             <span>Commonly used</span>
             <div className={styles.commonly}>
-                {T.commonlyUsedItems.map((item: string) =>
+                {COMMONLY_USED_RANGES_DICTIONARY.map(({id, text}) =>
                     <div
-                        key={item}
-                        onClick={() => onSetCommonRanges(item, onStartDateChange, onEndDateChange)}
+                        key={id}
+                        onClick={() => onSetCommonRanges(text, onStartDateChange, onEndDateChange)}
                         className={styles.commonlyItem}
                     >
-                        {item}
+                        {text}
                     </div>
                 )}
             </div>
